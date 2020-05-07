@@ -1,4 +1,5 @@
-alter procedure cariBukuByTag @tags nvarchar(max) as
+--mencari buku berdasarkan tag
+create procedure cariBukuByTag @tags nvarchar(max) as
 begin
 	declare @result table(
 		idBuku int,
@@ -71,7 +72,8 @@ begin
 end
 
 --------------------------------------------------------------
-alter procedure cariJumlahEksemplarAvailableByTag @tags nvarchar(max) as
+--mencari jumlah eksemplar yang tersedia berdasarkan tag
+create procedure cariJumlahEksemplarAvailableByTag @tags nvarchar(max) as
 begin
 	declare @buku table(
 		judulBuku varchar(50)
@@ -108,7 +110,8 @@ begin
 	select count(idEksemplar) as 'Jumlah Eksemplar Available', judulBuku from @result group by judulBuku
 end
 ----------------------------------------------------------------
-alter procedure cariEksemplarAvailableByTag @tags nvarchar(max) as
+--mencari eksemplar yang tersedia berdasarkan tag
+create procedure cariEksemplarAvailableByTag @tags nvarchar(max) as
 begin
 	declare @buku table(
 		judulBuku varchar(50)
@@ -145,7 +148,8 @@ begin
 	select * from @result
 end
 -----------------------------------------------------------------------
-alter function countTF (@judul varchar(50), @kata varchar(50))
+--menghitung TF pada suatu kata dari judul buku
+create function countTF (@judul varchar(50), @kata varchar(50))
 returns	int
 begin
 	declare @res int 
@@ -157,7 +161,8 @@ begin
 	return @res
 end
 ---------------------------------------------------------------------
-alter function countBobot(@judul varchar(50), @kata varchar(50))
+--menghitung bobot dari suatu judul buku
+create function countBobot(@judul varchar(50), @kata varchar(50))
 returns float
 begin	
 	declare @res float, @tf int, @idf float
@@ -167,7 +172,8 @@ begin
 	return @res
 end
 ----------------------------------------------------------------------
-alter procedure cariBukuByJudul @judul varchar(50) as
+--mencari judul buku
+create procedure cariBukuByJudul @judul varchar(50) as
 begin
 	--table hasil
 	declare @result table(
@@ -235,6 +241,7 @@ begin
 	select judulBuku from @result where kemiripan > 0 order by kemiripan desc 
 end
 --------------------------------------------------------------------------------------------
+--mencari eksemplar yang tersedia berdasarkan judul buku
 create procedure cariEksemplarAvailableByJudul @judul varchar(50) as
 begin
 	declare @buku table(
@@ -272,7 +279,8 @@ begin
 	select * from @result
 end
 -----------------------------------------------------------------------------------------
-alter procedure cariBukuYangSifatnyaMirip @judul varchar(50) as
+--mencari buku yang sifatnya mirip dengan buku lain
+create procedure cariBukuYangSifatnyaMirip @judul varchar(50) as
 begin
 	if exists (select judulBuku from buku where judulBuku = @judul)
 	begin
@@ -325,7 +333,8 @@ begin
 	end
 end
 --------------------------------------------------------------------------------------------------------------------
-alter procedure cariJenisBukuFavorit as
+--mencari tag buku yang paling sering dipinjam
+create procedure cariJenisBukuFavorit as
 begin
 	declare @result table(
 		tag varchar(50),
@@ -372,7 +381,8 @@ begin
 	select top 1 * from @result
 end
 --------------------------------------------------------------------------------
-alter procedure cariBukuPalingSeringTerpinjam as
+--mencari judul buku yang sering dipinjam
+create procedure cariBukuPalingSeringTerpinjam as
 begin
 	declare @result table(
 		idBuku int,

@@ -3,7 +3,9 @@
 --1. jalankan semua create table dulu 
 --2. jalankan semua add primary key
 --3. jalankan semua add foreign key
---4. jalankan sp insert berikut ini (sp_insert.sql): 
+--4. lalu jalankan semua stored procedure dan function pada file :
+--   sp_insert.sql, sp_update.sql, sp_delete.sql, sp_cari.sql
+--5. jalankan sp insert berikut ini (sp_insert.sql): 
 --insert anggota
 exec insertMember 'David Christopher','gmail@david.com','123456'
 exec insertMember 'Melody','gmail@melody.com','123456'
@@ -84,7 +86,36 @@ exec deleteMemberByNama 'Melody'
 --test case anggota tidak ada
 exec deleteMemberByNama 'Orang ini tidak ada'
 
+--pada file sp_cari.sql
 
+--mencoba kasus mencari buku berdasarkan tag
+exec cariBukuByTag 'petualangan,fantasy'
+--test case semua tag tidak ada di buku
+exec cariBukuByTag 'horror,education'
+--test case salah satu tag tidak terdaftar
+exec cariBukuByTag 'romance, horror'
+
+--mencoba kasus jumlah eksemplar yang tersedia berdasarkan tag
+exec cariJumlahEksemplarAvailableByTag 'comedy,romance'
+
+--mencoba kasus eksemplar yang tersedia berdasarkan tag
+exec cariEksemplarAvailableByTag 'petualangan,fantasy'
+
+--mencoba kasus mencari judul buku
+exec cariBukuByJudul 'petualangan'
+
+--mencoba kasus eksemplar yang tersedia berdasarkan judul buku
+exec cariEksemplarAvailableByJudul 'milea'
+
+--mencoba kasus mencari buku yang tag nya mirip
+exec cariBukuYangSifatnyaMirip 'milea'
+--test case judul buku tidak terdaftar
+exec cariBukuYangSifatnyaMirip 'jurus masak'
+
+--mencari tag buku favorit
+exec cariJenisBukuFavorit
+--mencari judul buku favorit
+exec cariBukuPalingSeringTerpinjam
 
 --untuk melihat tabel2
 select * from peminjaman
@@ -96,10 +127,6 @@ select * from tag
 select * from buku_memiliki_kata
 select * from buku_memiliki_tag
 select * from eksemplar
-
---Asumsi
---nama pengarang harus lengkap dan satu anggota hanya meminjam satu eksemplar
-
 
 
 

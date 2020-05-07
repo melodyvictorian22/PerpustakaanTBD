@@ -198,7 +198,7 @@ create procedure insertKata @kata varchar(50) as
 	
 -----------------------------------------------------------------
 --Untuk melakukan peminjaman buku dengan nama parameter nama peminjam dan nama eksemplar(buku)
-alter procedure insertPinjamanBaru @namaPeminjam varchar(50), @namaEks varchar(50) as
+create procedure insertPinjamanBaru @namaPeminjam varchar(50), @namaEks varchar(50) as
 begin
 	declare @idAnggota int, @idBuku int
 	set @idAnggota = (select idAnggota from anggota where namaAnggota like '%'+@namaPeminjam+'%')

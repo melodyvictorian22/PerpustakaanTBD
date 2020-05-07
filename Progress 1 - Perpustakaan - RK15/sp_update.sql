@@ -1,5 +1,5 @@
 --Untuk melakukan pengembalian buku dengan parameter nama anggota dan judul eksemplar(buku)
-alter procedure UpdatePengembalianBuku @namaAnggota varchar(50), @judulEksemplar varchar(50) as
+create procedure UpdatePengembalianBuku @namaAnggota varchar(50), @judulEksemplar varchar(50) as
 begin
 	declare @idAnggota int, @idBuku int
 	set @idAnggota = (select idAnggota from anggota where namaAnggota like '%'+@namaAnggota+'%')
